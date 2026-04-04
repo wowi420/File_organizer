@@ -1,15 +1,19 @@
 #!/bin/python3
 import os
 import sys
+import argparse
+parser=argparse.ArgumentParser(prog="file_organizer")
+parser.add_argument("plce",help="what directories you want to organize", type = str)
+args = parser.parse_args()
 path = os.path.expanduser("~")
 # cwd= os.getcwd() <-- this will be used if i do make it inro argparse tool
-place = input("what dir you wanna organize:") #no need for parent dir
-standard_path = os.path.join(path,place)
+# place = input("what dir you wanna organize:") #no need for parent dir
+standard_path = os.path.join(path,args.plce)
 
 try:
     files=(os.listdir(standard_path))
 except FileNotFoundError:
-    print(f"{place} does not exist")
+    print(f"{args.plce} does not exist")
     sys.exit()
 os.chdir(standard_path)
 data = {".png":"pictures", ".jpg":"pictures", ".jpeg": "pictures", ".docx":"documents", ".pptx":"documents", ".txt" : "documents"}
